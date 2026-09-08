@@ -24,7 +24,7 @@ module "keda" {
 ## Inputs
 
 | Name            | Description                                  | Type     | Default      | Required |
-| --------------- | -------------------------------------------- | -------- | ------------ | :------: |
+| --------------- | -------------------------------------------- | -------- | ------------ | -------- |
 | `release_name`  | Helm release name for KEDA                   | `string` | `"kedacore"` | no       |
 | `namespace`     | Kubernetes namespace for KEDA                | `string` | `"keda"`     | no       |
 | `chart_version` | Helm chart version (empty string for latest) | `string` | `""`         | no       |
