@@ -8,7 +8,7 @@ KEDA enables autoscaling of workloads based on events and external metrics, not 
 
 - **Event-based scaling**: Scale based on external events
 - **Custom metrics**: Scale on custom application metrics
-- **Example deployments**: Optional example KEDA scalers for testing
+- **Values passthrough**: tune the operator and metrics server via `values`
 
 ## Quick Start
 
