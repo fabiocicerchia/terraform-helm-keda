@@ -24,7 +24,7 @@ Feature: Running the repository's make verbs
     Given tflint is not installed
     When the maintainer runs make analyze
     Then the message "analyze needs tflint: https://github.com/terraform-linters/tflint" is shown on stderr
-    And the command fails with exit status 69
+    And make reports the analyze verb failing with "Error 69"
     And no analysis is performed
 
   @id:developer-tooling.task-runner.004 @rule:tooling.make.not-applicable-verbs-explain @inferred @source:Makefile#build

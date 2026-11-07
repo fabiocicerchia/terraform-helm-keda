@@ -3,7 +3,7 @@ Feature: Reading back the example's KEDA deployment
   Shows operators who copy the worked example how to see where KEDA landed, under which release name, and which chart version, so downstream configuration can use those values.
 
   Background:
-    Given the operator applies the worked example, which installs KEDA as release "keda" in namespace "keda-system" pinned to chart version "2.14.0"
+    Given the operator works from the worked example, which installs KEDA as release "keda" in namespace "keda-system" pinned to chart version "2.14.0"
 
   @id:integration.usage-examples.003 @rule:integration.usage-examples.reexports-deployment-outputs @inferred @source:examples/outputs.tf#keda_namespace @questionable
   Scenario Outline: The example reports where KEDA was deployed, under which release and at which chart version

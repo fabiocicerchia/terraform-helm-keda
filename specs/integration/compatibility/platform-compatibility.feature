@@ -20,13 +20,13 @@ Feature: Declaring supported Terraform, OpenTofu and Helm provider versions
 
   @id:integration.compatibility.002 @rule:keda.compatibility.minimum-helm-provider-version @inferred @source:versions.tf#terraform
   Scenario Outline: The module requires the HashiCorp Helm provider at version 2.0 or later
-    Given the operator's configuration locks the hashicorp/helm provider to version <provider_version>
+    Given the operator's configuration requires the hashicorp/helm provider at exactly version <provider_version>
     When the operator initialises the configuration
     Then the module is <outcome>
 
     Examples:
-      | provider_version | outcome                                                          |
-      | 1.3.2            | refused because no installable provider version satisfies >= 2.0 |
-      | 2.0.0            | accepted                                                         |
-      | 2.17.0           | accepted                                                         |
-      | 3.0.2            | accepted                                                         |
+      | provider_version | outcome                                                                         |
+      | 1.3.2            | refused because no available provider version matches both it and ">= 2.0" |
+      | 2.0.0            | accepted                                                                        |
+      | 2.17.0           | accepted                                                                        |
+      | 3.0.2            | accepted                                                                        |
