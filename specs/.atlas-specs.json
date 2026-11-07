@@ -1,0 +1,462 @@
+{
+ "excluded": {
+  "examples/examples": [
+   {
+    "candidate": "Example declares required_version >= 1.0 for Terraform",
+    "covered_by": "integration/compatibility (module versions.tf); the example adds no stricter rule",
+    "reason": "DUPLICATE_OF",
+    "source": "examples/main.tf#terraform"
+   },
+   {
+    "candidate": "Example refers to the module by the local path \"../\"",
+    "covered_by": "",
+    "reason": "TECH_INFRA",
+    "source": "examples/main.tf#module.keda"
+   },
+   {
+    "candidate": "The worked example installs KEDA 2.14.0 as release \"keda\" in namespace \"keda-system\"",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "examples/main.tf#module.keda"
+   },
+   {
+    "candidate": "The worked example caps the KEDA operator and metrics server at 1 CPU and 1000Mi memory",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "examples/main.tf#module.keda"
+   }
+  ],
+  "examples/outputs": [
+   {
+    "candidate": "Output description strings as standalone behaviour",
+    "covered_by": "",
+    "reason": "TRIVIAL",
+    "source": "examples/outputs.tf#keda_namespace"
+   },
+   {
+    "candidate": "Example outputs pass the module's outputs straight through",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "examples/outputs.tf#keda_release_name"
+   },
+   {
+    "candidate": "Module reports deployed namespace/release/chart version (root outputs)",
+    "covered_by": "belongs to integration/deployment-outputs, owned by the root module, not examples/outputs",
+    "reason": "UNVERIFIABLE",
+    "source": "outputs.tf#chart_version"
+   }
+  ],
+  "terraform-helm-keda/makefile": [
+   {
+    "candidate": "make setup installs the pre-commit hook",
+    "covered_by": "",
+    "reason": "TECH_DEVTOOLING",
+    "source": "Makefile#setup"
+   },
+   {
+    "candidate": "make install downloads pinned providers via terraform init -backend=false",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": "Makefile#install"
+   },
+   {
+    "candidate": "make lint runs every pre-commit hook on all files",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": "Makefile#lint"
+   },
+   {
+    "candidate": "make format rewrites Terraform sources with terraform fmt -recursive",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": "Makefile#format"
+   },
+   {
+    "candidate": "make analyze runs tflint --recursive when tflint is installed",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": "Makefile#analyze"
+   },
+   {
+    "candidate": "test discards init output and only shows validate output",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "Makefile#test"
+   }
+  ],
+  "terraform-helm-keda/outputs": [
+   {
+    "candidate": "Output descriptions text (\"Kubernetes namespace where KEDA is deployed\", etc.)",
+    "covered_by": "",
+    "reason": "TRIVIAL",
+    "source": "outputs.tf#output.namespace"
+   },
+   {
+    "candidate": "Example re-exports module outputs as keda_namespace, keda_release_name, keda_chart_version",
+    "covered_by": "keda.outputs.report-deployed-release-identity",
+    "reason": "DUPLICATE_OF",
+    "source": "examples/outputs.tf#output.keda_namespace"
+   },
+   {
+    "candidate": "Outputs are read from resource attributes rather than echoing the input variables",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "outputs.tf#output.release_name"
+   },
+   {
+    "candidate": "The module reports the namespace, release name and pinned chart version KEDA was deployed with",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "outputs.tf#output.namespace"
+   },
+   {
+    "candidate": "When no chart version is pinned, the reported chart version is the one Helm actually installed",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "outputs.tf#output.chart_version"
+   }
+  ],
+  "terraform-helm-keda/terraform-helm-keda": [
+   {
+    "candidate": "Chart dependencies are refreshed before install (dependency_update = true)",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "Values are YAML-encoded before being passed to Helm",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "Outputs report namespace, release name and chart version",
+    "covered_by": "outside this module's source files (outputs.tf); belongs to integration/deployment-outputs",
+    "reason": "UNVERIFIABLE",
+    "source": "outputs.tf#namespace"
+   },
+   {
+    "candidate": "Required Terraform >= 1.0 and Helm provider >= 2.0",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": "versions.tf#terraform"
+   },
+   {
+    "candidate": "With no inputs, KEDA is installed as release kedacore in namespace keda from the official chart",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "KEDA's namespace is created when it does not exist yet",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "A given chart version is installed exactly, and an empty one installs the latest",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "Chart values given by the operator configure the KEDA deployment",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "Installing over a leftover release with the same name replaces it instead of failing",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "main.tf#helm_release.keda"
+   }
+  ],
+  "terraform-helm-keda/tflint": [
+   {
+    "candidate": "TFLint runs the terraform plugin with the 'all' preset",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#plugin \"terraform\""
+   },
+   {
+    "candidate": "Lint requires a declared Terraform version and pinned required providers",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_required_version\""
+   },
+   {
+    "candidate": "Lint requires every variable and output to be documented",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_documented_variables\""
+   },
+   {
+    "candidate": "Lint requires every variable to declare a type",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_typed_variables\""
+   },
+   {
+    "candidate": "Lint enforces snake_case naming for Terraform identifiers",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_naming_convention\""
+   },
+   {
+    "candidate": "Lint flags unused declarations",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_unused_declarations\""
+   },
+   {
+    "candidate": "Lint requires module sources to be pinned",
+    "covered_by": "",
+    "reason": "TECH_BUILD",
+    "source": ".tflint.hcl#rule \"terraform_module_pinned_source\""
+   }
+  ],
+  "terraform-helm-keda/variables": [
+   {
+    "candidate": "Inputs carry descriptions and explicit types",
+    "covered_by": "",
+    "reason": "TECH_DEVTOOLING",
+    "source": "variables.tf#variable.release_name"
+   },
+   {
+    "candidate": "Per-input validation permutations (empty strings, invalid namespace names)",
+    "covered_by": "",
+    "reason": "TRIVIAL",
+    "source": "variables.tf#variable.namespace"
+   },
+   {
+    "candidate": "Empty chart_version converted to an unpinned release inside the Helm resource",
+    "covered_by": "keda.inputs.defaults-when-omitted",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "main.tf#helm_release.keda"
+   },
+   {
+    "candidate": "An omitted input falls back to its documented default",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "variables.tf#variable.release_name"
+   },
+   {
+    "candidate": "An input the operator supplies replaces its default",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "variables.tf#variable.namespace"
+   },
+   {
+    "candidate": "Chart values of any shape are passed to the chart without checks",
+    "covered_by": "",
+    "reason": "UNVERIFIABLE",
+    "source": "variables.tf#variable.values"
+   }
+  ],
+  "terraform-helm-keda/versions": [
+   {
+    "candidate": "Comment in versions.tf stating Terraform >= 1.0 / OpenTofu >= 1.6 compatibility",
+    "covered_by": "keda.compatibility.minimum-terraform-version",
+    "reason": "DUPLICATE_OF",
+    "source": "versions.tf#terraform"
+   },
+   {
+    "candidate": "Provider resolved from the hashicorp/helm registry source address",
+    "covered_by": "",
+    "reason": "INTERNAL_MECHANISM",
+    "source": "versions.tf#terraform"
+   }
+  ]
+ },
+ "lifted": {
+  "examples/examples": [],
+  "examples/outputs": [],
+  "terraform-helm-keda/makefile": [],
+  "terraform-helm-keda/outputs": [],
+  "terraform-helm-keda/terraform-helm-keda": [],
+  "terraform-helm-keda/tflint": [],
+  "terraform-helm-keda/variables": [],
+  "terraform-helm-keda/versions": []
+ },
+ "retired": [],
+ "scenarios": {
+  "developer-tooling.task-runner.001": {
+   "file": "specs/developer-tooling/task-runner/make-verbs.feature",
+   "fingerprint": "517de792f113",
+   "human": false,
+   "rule": "tooling.make.bare-make-lists-verbs",
+   "source": "Makefile#help",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "developer-tooling.task-runner.002": {
+   "file": "specs/developer-tooling/task-runner/make-verbs.feature",
+   "fingerprint": "8145e195cde0",
+   "human": false,
+   "rule": "tooling.make.test-validates-module-and-examples",
+   "source": "Makefile#test",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "developer-tooling.task-runner.003": {
+   "file": "specs/developer-tooling/task-runner/make-verbs.feature",
+   "fingerprint": "c5311b237c3f",
+   "human": false,
+   "rule": "tooling.make.analyze-refuses-without-tflint",
+   "source": "Makefile#analyze",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "developer-tooling.task-runner.004": {
+   "file": "specs/developer-tooling/task-runner/make-verbs.feature",
+   "fingerprint": "4d16ff5f8f37",
+   "human": false,
+   "rule": "tooling.make.not-applicable-verbs-explain",
+   "source": "Makefile#build",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "integration.compatibility.001": {
+   "file": "specs/integration/compatibility/platform-compatibility.feature",
+   "fingerprint": "c4352a3c0676",
+   "human": false,
+   "rule": "keda.compatibility.minimum-terraform-version",
+   "source": "versions.tf#terraform",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "integration.compatibility.002": {
+   "file": "specs/integration/compatibility/platform-compatibility.feature",
+   "fingerprint": "c4352a3c0676",
+   "human": false,
+   "rule": "keda.compatibility.minimum-helm-provider-version",
+   "source": "versions.tf#terraform",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "integration.usage-examples.001": {
+   "file": "specs/integration/usage-examples/keda-usage-example.feature",
+   "fingerprint": "a6c70a4a7b07",
+   "human": false,
+   "rule": "examples.usage.reexports-deployment-outputs",
+   "source": "examples/outputs.tf#keda_namespace",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "integration.usage-examples.002": {
+   "file": "specs/integration/usage-examples/keda-usage-example.feature",
+   "fingerprint": "d9b0ccb746cd",
+   "human": false,
+   "rule": "examples.usage.helm-provider-2x-only",
+   "source": "examples/main.tf#terraform",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  },
+  "integration.usage-examples.003": {
+   "file": "specs/integration/usage-examples/example-deployment-outputs.feature",
+   "fingerprint": "a6c70a4a7b07",
+   "human": false,
+   "rule": "integration.usage-examples.reexports-deployment-outputs",
+   "source": "examples/outputs.tf#keda_namespace",
+   "status": "inferred",
+   "test": "",
+   "tests": []
+  }
+ },
+ "taxonomy": {
+  "domains": [
+   {
+    "areas": [
+     {
+      "description": "Deploys KEDA from the official kedacore chart repository as a named Helm release, replacing and updating dependencies as needed.",
+      "slug": "release-deployment",
+      "title": "Release deployment"
+     },
+     {
+      "description": "Chooses the namespace KEDA is installed into and creates it automatically when missing.",
+      "slug": "namespace-placement",
+      "title": "Namespace placement"
+     },
+     {
+      "description": "Pins the KEDA chart to a specific version or tracks the latest when none is given.",
+      "slug": "version-pinning",
+      "title": "Chart version pinning"
+     }
+    ],
+    "description": "Installing the KEDA autoscaler into a Kubernetes cluster as a Helm release.",
+    "slug": "keda-installation",
+    "title": "KEDA Installation"
+   },
+   {
+    "areas": [
+     {
+      "description": "Documented, typed inputs with sensible defaults for release name, namespace, chart version and values.",
+      "slug": "module-inputs",
+      "title": "Module inputs"
+     },
+     {
+      "description": "Passes arbitrary Helm values through to the chart, such as operator and metrics-server resource limits.",
+      "slug": "chart-values",
+      "title": "Chart value overrides"
+     }
+    ],
+    "description": "How consumers tailor the KEDA deployment through module inputs.",
+    "slug": "configuration",
+    "title": "Configuration"
+   },
+   {
+    "areas": [
+     {
+      "description": "Reports the namespace, release name and chart version of the deployed KEDA for downstream use.",
+      "slug": "deployment-outputs",
+      "title": "Deployment outputs"
+     },
+     {
+      "description": "Declares the supported Terraform/OpenTofu and Helm provider versions.",
+      "slug": "compatibility",
+      "title": "Platform compatibility"
+     },
+     {
+      "description": "A worked example calling the module with a pinned version, custom namespace and resource limits, and re-exporting its outputs.",
+      "slug": "usage-examples",
+      "title": "Usage examples"
+     }
+    ],
+    "description": "What the module exposes to and requires from the code that calls it.",
+    "slug": "integration",
+    "title": "Integration"
+   },
+   {
+    "areas": [
+     {
+      "description": "A self-documenting set of make verbs for setup, install, format, test and declared no-ops for build and run.",
+      "slug": "task-runner",
+      "title": "Task runner"
+     },
+     {
+      "description": "Initialises and validates both the module and its examples without a backend.",
+      "slug": "validation",
+      "title": "Validation"
+     },
+     {
+      "description": "Static analysis and pre-commit gates enforcing documented, typed, snake_case, pinned and unused-free Terraform.",
+      "slug": "linting-standards",
+      "title": "Linting and standards"
+     }
+    ],
+    "description": "Commands and checks maintainers use to build, validate and keep the module tidy.",
+    "slug": "developer-tooling",
+    "title": "Developer tooling"
+   }
+  ]
+ }
+}
