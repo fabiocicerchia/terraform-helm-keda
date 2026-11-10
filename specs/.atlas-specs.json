@@ -279,7 +279,9 @@
   "terraform-helm-keda/variables": [],
   "terraform-helm-keda/versions": []
  },
- "retired": [],
+ "retired": [
+  "integration.usage-examples.001"
+ ],
  "scenarios": {
   "developer-tooling.task-runner.001": {
    "file": "specs/developer-tooling/task-runner/make-verbs.feature",
@@ -337,16 +339,6 @@
    "human": false,
    "rule": "keda.compatibility.minimum-helm-provider-version",
    "source": "versions.tf#terraform",
-   "status": "inferred",
-   "test": "",
-   "tests": []
-  },
-  "integration.usage-examples.001": {
-   "file": "specs/integration/usage-examples/keda-usage-example.feature",
-   "fingerprint": "a6c70a4a7b07",
-   "human": false,
-   "rule": "examples.usage.reexports-deployment-outputs",
-   "source": "examples/outputs.tf#keda_namespace",
    "status": "inferred",
    "test": "",
    "tests": []
